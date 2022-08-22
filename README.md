@@ -29,8 +29,23 @@ BCRYPT_PASSWORD=your-secret-password
 SALT_ROUNDS = 10
 TOKEN_SECRET =your-secret-token
 ```
-
-### Steps to run Application
+### Setup PostgreSQL Database:
+- To start PostgreSQL, type this command into the terminal:
+   ```bash
+     psql
+   ```
+- Next type this command into the PostgreSQL interface to Create development database:
+  ```bash
+    CREATE DATABASE database_dev;
+  ```
+- Finally Create the Testing database:
+    ```bash
+        CREATE DATABASE database_test;
+    ```
+- To Check if Databases are created `\l` into the psql prompt
+- Use Default User of PostgreSQL: `postgres`
+- Use Default PostgreSQL Port:`5432`
+### Steps to run Application:
 
 ```bash
 # start migration

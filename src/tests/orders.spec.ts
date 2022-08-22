@@ -40,7 +40,8 @@ describe('Test Order endpoints', () => {
       .set('Authorization', `Bearer ${token}`);
     const response = await request
       .post('/store/orders/1/products')
-      .send('quantity=1&productId=1');
+      .send('quantity=1&productId=1')
+      .set('Authorization', `Bearer ${token}`);
     expect(response.body.message).toBe(
       'Successfully added product to the order'
     );
