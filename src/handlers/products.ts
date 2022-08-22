@@ -6,15 +6,19 @@ const store = new ProductStore();
 
 // Show all products
 export const index = async (_req: Request, res: Response) => {
-  const products = await store.index();
-  res.json(products);
+  try {
+    const products = await store.index();
+    res.json(products);
+  } catch (error) {
+    res.status(400).send(error);
+  }
 };
 
 // show certain product
 export const show = async (req: Request, res: Response) => {
   try {
     const getProduct = await store.show(parseInt(req.params.id));
-    res.json({getProduct});
+    res.json({ getProduct });
   } catch (error) {
     res.status(404).send(error);
   }
