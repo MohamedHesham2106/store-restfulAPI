@@ -43,12 +43,15 @@ describe('Test Product endpoints', () => {
   it('test update endpoint', async () => {
     const response = await request
       .put('/store/products/1')
-      .send('name=edited&description=edited&price=15&category=edited');
+      .send('name=edited&description=edited&price=15&category=edited')
+      .set('Authorization', `Bearer ${token}`);
     expect(response.body.product.name).toEqual('edited');
   });
 
   it('test delete endpoint', async () => {
-    const response = await request.delete('/store/products/1');
+    const response = await request
+      .delete('/store/products/1')
+      .set('Authorization', `Bearer ${token}`);
     expect(response.body.message).toEqual('successfully removed edited');
   });
 });

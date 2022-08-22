@@ -16,7 +16,7 @@ describe('Test User endpoints', () => {
   });
   it('test index endpoint', async () => {
     const response = await request.get('/store/users');
-    expect(response.body).toEqual([]);
+    expect(response.body).toEqual('Access denied, invalid token');
   });
   it('test create endpoint', async () => {
     // sent  as x-www-form-urlencoded

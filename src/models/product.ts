@@ -23,8 +23,10 @@ export class ProductStore {
     try {
       const conn = await Client.connect();
       const sql = `SELECT * FROM products WHERE id = ${id}`;
+    
       const result = await conn.query(sql);
       conn.release();
+   
       return result.rows[0];
     } catch (error) {
       throw new Error(

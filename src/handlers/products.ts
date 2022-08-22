@@ -13,8 +13,8 @@ export const index = async (_req: Request, res: Response) => {
 // show certain product
 export const show = async (req: Request, res: Response) => {
   try {
-    const getProduct = store.show(parseInt(req.params.id));
-    res.json(getProduct);
+    const getProduct = await store.show(parseInt(req.params.id));
+    res.json({getProduct});
   } catch (error) {
     res.status(404).send(error);
   }
@@ -52,6 +52,16 @@ export const create = async (req: Request, res: Response) => {
 
 // Update products
 export const update = async (req: Request, res: Response) => {
+  //Check Token
+  try {
+    const authorizationHeader = req.headers.authorization;
+    const token = authorizationHeader?.split(' ')[1];
+    jwt.verify(token as string, process.env.TOKEN_SECRET as string);
+  } catch (err) {
+    res.status(401);
+    res.json('Access denied, invalid token');
+    return;
+  }
   const product: Product = {
     id: parseInt(req.params.id),
     name: req.body.name,
@@ -71,6 +81,16 @@ export const update = async (req: Request, res: Response) => {
 };
 // Remove Product
 export const remove = async (req: Request, res: Response) => {
+  //Check Token
+  try {
+    const authorizationHeader = req.headers.authorization;
+    const token = authorizationHeader?.split(' ')[1];
+    jwt.verify(token as string, process.env.TOKEN_SECRET as string);
+  } catch (err) {
+    res.status(401);
+    res.json('Access denied, invalid token');
+    return;
+  }
   try {
     const deletedProduct = await store.delete(parseInt(req.params.id));
     res.json({

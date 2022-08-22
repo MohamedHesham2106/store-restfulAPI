@@ -18,7 +18,7 @@ export class UserStore {
   async index(): Promise<User[]> {
     try {
       const conn = await Client.connect();
-      const sql = 'SELECT * FROM users';
+      const sql = 'SELECT id,email,username,firstname,lastname FROM users';
       const result = await conn.query(sql);
       conn.release();
       return result.rows;
@@ -29,7 +29,7 @@ export class UserStore {
   async show(id: number): Promise<User> {
     try {
       const conn = await Client.connect();
-      const sql = `SELECT * FROM users WHERE id = ${id}`;
+      const sql = `SELECT id,email,username,firstname,lastname FROM users WHERE id = ${id}`;
       const result = await conn.query(sql);
       conn.release();
       return result.rows[0];

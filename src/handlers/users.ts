@@ -14,9 +14,18 @@ const { TOKEN_SECRET } = process.env;
 
 const store = new UserStore();
 
-export const index = async (_req: Request, res: Response) => {
+export const index = async (req: Request, res: Response) => {
+  try {
+    const authorizationHeader = req.headers.authorization;
+    const token = authorizationHeader?.split(' ')[1];
+    jwt.verify(token as string, process.env.TOKEN_SECRET as string);
+  } catch (err) {
+    res.status(401);
+    res.json('Access denied, invalid token');
+    return;
+  }
   const users = await store.index();
-  res.json(users);
+  res.json({ users, message: 'Successfully Retrieved Users' });
 };
 export const show = async (req: Request, res: Response) => {
   try {
