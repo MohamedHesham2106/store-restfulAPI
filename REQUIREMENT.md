@@ -331,11 +331,4 @@
   status: string;
   user_id: number;
   };
-<<<<<<< HEAD
-```
-
-=======
-
-```
->>>>>>> bb2b735757b8faea3cfeb6c07d2b577712f84215
 ```
