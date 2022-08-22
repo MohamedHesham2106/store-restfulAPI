@@ -12,7 +12,6 @@ export class ProductStore {
     try {
       const conn = await Client.connect();
       const sql = 'SELECT * FROM products';
-      console.log(sql);
       const result = await conn.query(sql);
       conn.release();
       return result.rows;
@@ -37,7 +36,6 @@ export class ProductStore {
     try {
       const conn = await Client.connect();
       const sql = `INSERT INTO products (name, description, price,category) VALUES ('${p.name}', '${p.description}', ${p.price},'${p.category}') RETURNING *`;
-      console.log(sql);
       const result = await conn.query(sql);
       conn.release();
       return result.rows[0];
@@ -71,7 +69,6 @@ export class ProductStore {
     try {
       const conn = await Client.connect();
       const sql = `SELECT * FROM products WHERE category='${category}'`;
-      console.log(sql);
       const result = await conn.query(sql);
       conn.release();
       return result.rows;

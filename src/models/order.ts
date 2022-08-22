@@ -10,7 +10,6 @@ export class OrderStore {
     try {
       const conn = await Client.connect();
       const sql = `INSERT INTO orders (status, user_id) VALUES ('${order.status}', ${order.user_id}) RETURNING *`;
-      console.log(sql);
       const result = await conn.query(sql);
       return result.rows[0];
     } catch (error) {
@@ -21,7 +20,6 @@ export class OrderStore {
     try {
       const conn = await Client.connect();
       const sql = `SELECT * FROM orders WHERE user_id =${id}`;
-      console.log(sql);
       const result = await conn.query(sql);
       conn.release();
       return result.rows;
@@ -31,13 +29,13 @@ export class OrderStore {
   }
   async addProduct(
     quantity: number,
-    orderId: string,
-    productId: string
+    orderId: number,
+    productId: number
   ): Promise<Order> {
     try {
       const sql = `INSERT INTO order_products (quantity, order_id, product_id) VALUES(${quantity}, ${orderId}, ${productId}) RETURNING *`;
       const conn = await Client.connect();
-
+      console.log(sql);
       const result = await conn.query(sql);
 
       const order = result.rows[0];
