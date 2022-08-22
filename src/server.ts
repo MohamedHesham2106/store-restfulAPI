@@ -9,10 +9,12 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 // create an instance server
 const app: Application = express();
-// HTTP request logger middleware
-app.use(morgan('short'));
 // Body parser middleware
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+// HTTP request logger middleware
+app.use(morgan('short'));
+
 
 app.get('/', (_req: Request, res: Response) => {
   res.send('Hello World!');

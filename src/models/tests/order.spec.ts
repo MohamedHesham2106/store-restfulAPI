@@ -46,7 +46,7 @@ describe('Test Order Model method Logic', () => {
   afterAll(async () => {
     const conn = await Client.connect();
     const sql =
-      'TRUNCATE users RESTART IDENTITY CASCADE;\nTRUNCATE orders RESTART IDENTITY CASCADE;\nTRUNCATE products RESTART IDENTITY CASCADE;';
+      'TRUNCATE order_products RESTART IDENTITY CASCADE;\nTRUNCATE users RESTART IDENTITY CASCADE;\nTRUNCATE orders RESTART IDENTITY CASCADE;\nTRUNCATE products RESTART IDENTITY CASCADE;';
     await conn.query(sql);
     conn.release();
   });

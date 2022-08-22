@@ -1,13 +1,11 @@
-/* import supertest from 'supertest';
+import supertest from 'supertest';
 import app from '../server';
 
-// create a request object
 const request = supertest(app);
 
 describe('Test endpoint response', () => {
-  it('test hello world endpoint', async () => {
-    const response = await request.get('/');
+  it('test main route endpoint', async () => {
+    const response = await request.get('/store');
     expect(response.status).toBe(200);
   });
 });
- */

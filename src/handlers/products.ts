@@ -38,6 +38,7 @@ export const create = async (req: Request, res: Response) => {
     price: parseInt(req.body.price),
     category: req.body.category,
   };
+
   try {
     const newProducts = await store.create(product);
     res.json({

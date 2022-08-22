@@ -35,7 +35,7 @@ export const getOrderbyUserId = async (req: Request, res: Response) => {
     const decode = jwt.verify(token as string, TOKEN_SECRET as string) as Token;
     const id = decode.user.id;
     const showOrder = await store.getOrderbyUserId(id);
-    res.json(showOrder);
+    res.json({ showOrder, message: 'Retrieved order successfully' });
   } catch (error) {
     res.status(404).json({ message: "Couldn't get order" });
   }
@@ -44,7 +44,7 @@ export const addProduct = async (req: Request, res: Response) => {
   const product = {
     quantity: parseInt(req.body.quantity),
     productId: req.body.productId,
-    orderId: req.body.orderId,
+    orderId: parseInt(req.params.id),
   };
   try {
     const addToOrder = await store.addProduct(
